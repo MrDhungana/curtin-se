@@ -32,7 +32,7 @@ if __name__ == "__main__":
         + " (for north, east, south and west).")
     solution = input("Your solution: ")
 
-    row = 1
+    currentRow = 1
     currentCol = 0
     done = False
     solved = False
@@ -42,17 +42,17 @@ if __name__ == "__main__":
     while not done and charIndex < solutionLength:
         
         direction = solution[charIndex]
-        print("Location: (" + str(row) + ", " + str(currentCol) 
+        print("Location: (" + str(currentRow) + ", " + str(currentCol) 
             + "), next direction: '" + direction + "'")
         
         if direction == NORTH:
-            row -= 1
+            currentRow -= 1
             
         elif direction == EAST:
             currentCol += 1
                 
         elif direction == SOUTH:
-            row += 1
+            currentRow += 1
                 
         elif direction == WEST:
             currentCol -= 1
@@ -60,21 +60,21 @@ if __name__ == "__main__":
         else:
             print("You have no idea where you're going") # Invalid direction.
         
-        if (row < 0 or currentCol < 0 
-                        or row >= len(grid) 
-                        or currentCol >= len(grid[row])):
+        if (currentRow < 0 or currentCol < 0 
+                        or currentRow >= len(grid) 
+                        or currentCol >= len(grid[currentRow])):
             done = True
             print("You fall into the chasm of doom.") # Out of bounds.
             
         else:
             if grid[row][currentCol] == EMPTY:
-                grid[row][currentCol] = VISITED
+                grid[currentRow][currentCol] = VISITED
                 
-            elif grid[row][currentCol] == WALL:
+            elif grid[currentRow][currentCol] == WALL:
                 done = True
                 print("You stumble blindly into a solid concrete wall.") # Hit wall.
 
-            elif grid[row][currentCol] == END:
+            elif grid[currentRow][currentCol] == END:
                 done = True
                 solved = True
                 print("SOLVED!") # Solved.
